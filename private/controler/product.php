@@ -1,8 +1,8 @@
 <?php 
 ob_start();
-session_start();
+// session_start();
 $action = $_GET['actionis'];
-require_once('../initialize.php');
+require_once('../../private/initialize.php');
 
 if(is_post_request() and $action == 'postad'){
     $postedby = $_SESSION['email'];
@@ -21,18 +21,23 @@ if(is_post_request() and $action == 'postad'){
     $file_ext=strtolower(end(explode('.',$_FILES['image']['name'])));
       
     if(empty($errors)==true){
-        move_uploaded_file($file_tmp,"../../public/images/".$file_name);
-        $image = $file_name;
+      move_uploaded_file($file_tmp,"../../public/images/".$file_name);
+      $image = $file_name;
+      $postad = " INSERT INTO  products (post_by,title,product,brand, modal,location,price,color,image,description) values ('$postedby','$title','$product','$brand', '$modal','$location','$price','$color','$image','$description')";
+      if(!mysqli_query($db,$postad)){
+        header('location:' . '../../public/product/new.php?status=unsuccess');
+      }else{
+        header('location:' . '../../public/product/new.php?status=success');
+      }
     }else{
-        echo 'Image upload error';
+        header('location:' . '../../public/product/new.php?status=unsuccess');
     } 
+}
 
-    $postad = " INSERT INTO  products (post_by,title,product,brand, modal,location,price,color,image,description) values ('$postedby','$title','$product','$brand', '$modal','$location','$price','$color','$image','$description')";
-    if(!mysqli_query($db,$postad)){
-      header('location:' . '../../public/product/new.php?status=unsuccess');
-    }else{
-      header('location:' . '../../public/product/new.php?status=success');
-    }
+if(is_get_request() && $_GET['id']){
+  $id = $_GET['id'];
+  $s = " SELECT * FROM products where id = '$id' ";
+  $result = mysqli_query($db,$s);
 }
 ?>
 

@@ -21,14 +21,10 @@
 
     <div class="row" id="products">
         <?php while($row = mysqli_fetch_assoc($result)){ ?>
-        <a href="../public/product/view.php?id=<?php echo $row['id'];?> " class="card col-sm-3 m-3">
+        <a href="../public/product/view.php?id=<?php echo $row['id'];?>" class="card col-sm-3 m-3">
+          <p class="small float-right"><?php echo "₹. ".$row['price']; ?></p>
+          <p class="small float-left"><?php echo $row['description']; ?></p>
           <img class="card-img-top" src="<?php echo "../public/images/".$row['image']; ?>" alt="Card image cap">
-          <div class="card-body">
-              <h5 class="card-title"><?php echo $row['product']; ?></h5>
-              <hr>
-              <p class="small"><?php echo $row['title']; ?></p>
-          <button type="button" class="btn btn-outline"><?php echo "₹. ".$row['price']; ?></button>
-          </div>
         </a>
         <?php } ?>
     </div>

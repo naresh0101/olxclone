@@ -17,7 +17,6 @@
             exit;
         }else{
             header('location:' . '../../public/register.php?user=exists');
-            echo 'User already exist with this email !!';
         }   
     }
 
