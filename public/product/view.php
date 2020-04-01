@@ -14,9 +14,9 @@ require_once('../../private/controler/product.php');
 
 <div class="container" style="margin-top:100px;">
     <?php while($row = $result->fetch_assoc()) { ?>
-    <h4 class="text-success"><?php echo $row['title']; ?></h4>
     <div class="row">
          <div class="col-sm-6">
+            <h4 class="text"><?php echo $row['title']; ?></h4>
             <img class="card-img-top" src="../images/<?php echo $row['image']; ?>" />
         </div>
     
