@@ -8,7 +8,7 @@ if(is_get_request() and $_GET['status'] == 'success'){
   $alert = 'alert alert-info';
 }
 if(is_get_request() and $_GET['status'] == 'unsuccess') {
-    $msg = 'Post uploaded Successfully!!';
+    $msg = 'Post uploaded UnSuccessfully!!';
     $alert = 'alert alert-danger';
 }
 ?>
